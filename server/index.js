@@ -3,7 +3,7 @@ const {ApolloServer} = require("apollo-server-express");
 const express = require("express");
 const {typeDefs} = require("./Schema/TypeDefs")
 const {resolvers}= require("./Schema/Resolvers")
-const uri = require("./uri")
+const uri = require("../uri")
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true
