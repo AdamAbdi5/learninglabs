@@ -36,7 +36,7 @@ const typeDefs = gql`
     type Mutation {
         createStudent(first_name: String!, last_name: String!, classes: [String!]!): Student!
         createTeacher(first_name: String!, last_name: String!, classes: [String!]!): Teacher!
-        setTask(title: String!, description: String!, class: String!): String!
+        setTask(title: String!, description: String!, class: String!, teacherid: String!): String!
         submitTask(id: String!, text: String, tasksid: String!): String!
         viewTask(taskid: String!, teacherid: String!, studentid: String!): String!
     }
