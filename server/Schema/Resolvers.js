@@ -61,7 +61,7 @@ const resolvers = {
         async setTask(parent, args){
 
             
-            const task = new Task({title: args.title, description: args.description, teacher: args.id})
+            const task = new Task({title: args.title, description: args.description, teacher: args.teacherid})
             
             
             try{
@@ -90,6 +90,17 @@ const resolvers = {
                 
                 return args.text
             } catch(err){
+                return err;
+            }
+        },
+
+        async viewTask(parent, args){
+            try{
+                const task = Student.find({_id: args.studentid, "tasks.id": args.taskid })
+                
+
+                return task;
+            } catch (err){
                 return err;
             }
         }
