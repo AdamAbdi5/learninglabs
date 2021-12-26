@@ -30,7 +30,7 @@ const typeDefs = gql`
     type Query {
         getAllStudents: String!
         getAllTeachers: String!
-        viewTask(id: String!): Task!
+        viewTask(taskid: String!, studentid: String!): String!
     }
 
     type Mutation {
@@ -38,7 +38,7 @@ const typeDefs = gql`
         createTeacher(first_name: String!, last_name: String!, classes: [String!]!): Teacher!
         setTask(title: String!, description: String!, class: String!, teacherid: String!): String!
         submitTask(id: String!, text: String, tasksid: String!): String!
-        viewTask(taskid: String!, studentid: String!): String!
+        
     }
 
 `
