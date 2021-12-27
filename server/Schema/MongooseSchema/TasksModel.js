@@ -17,6 +17,10 @@ const tasksSchema = new mongoose.Schema({
     teacher: {
         type: String,
         required: true
+    }, 
+    class: {
+        type: String,
+        required: true
     },
     completed: {
         type: Boolean,
