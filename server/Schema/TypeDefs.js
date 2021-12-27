@@ -30,7 +30,7 @@ const typeDefs = gql`
     type Query {
         getAllStudents: String!
         getAllTeachers: String!
-        viewTask(taskid: String!, studentid: String!): String!
+        viewTask(id: String!): String!
         viewAllTasks(studentid: String!): String!
     }
 

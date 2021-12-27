@@ -26,10 +26,9 @@ const resolvers = {
 
         async viewTask(parent, args){
             try{
-                const task = Student.find({_id: args.studentid, "tasks.id": args.taskid })
+                const task = await Task.find({"_id": args.id})
                 
-
-                return task;
+                return JSON.stringify(task);
             } catch (err){
                 return err;
             }
@@ -84,6 +83,7 @@ const resolvers = {
                     $push: {tasks: task}
                 })
 
+                await task.save()
                 return JSON.stringify(task);
             } catch (err){
                 return err;
