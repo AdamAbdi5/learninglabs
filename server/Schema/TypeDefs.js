@@ -31,6 +31,7 @@ const typeDefs = gql`
         getAllStudents: String!
         getAllTeachers: String!
         viewTask(taskid: String!, studentid: String!): String!
+        viewAllTasks(studentid: String!): String!
     }
 
     type Mutation {
