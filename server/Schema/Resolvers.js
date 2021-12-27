@@ -32,6 +32,16 @@ const resolvers = {
             } catch (err){
                 return err;
             }
+        },
+
+        async viewAllTasks(parent, args){
+            try{
+                const tasks = await Student.find({"_id": args.id}, {"tasks": 1});
+
+                return JSON.stringify(tasks);
+            } catch (err){
+                return err;
+            }
         }
     },
 

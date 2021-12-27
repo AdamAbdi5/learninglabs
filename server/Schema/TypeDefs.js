@@ -31,13 +31,13 @@ const typeDefs = gql`
         getAllStudents: String!
         getAllTeachers: String!
         viewTask(id: String!): String!
-        viewAllTasks(studentid: String!): String!
+        viewAllTasks(id: String!): String!
     }
 
     type Mutation {
         createStudent(first_name: String!, last_name: String!, classes: [String!]!): Student!
         createTeacher(first_name: String!, last_name: String!, classes: [String!]!): Teacher!
-        setTask(title: String!, description: String!, class: String!, teacherid: String!): String!
+        setTask(title: String!, description: String!, teacherid: String!): String!
         submitTask(id: String!, text: String, tasksid: String!): String!
         
     }
