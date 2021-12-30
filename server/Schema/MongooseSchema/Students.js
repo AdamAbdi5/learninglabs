@@ -21,6 +21,11 @@ const studentSchema = new mongoose.Schema({
         lowercase: true
     },
 
+    password: {
+        type: String,
+        required: true
+    },
+
     tasks: {
         type: [tasksSchema]
     }

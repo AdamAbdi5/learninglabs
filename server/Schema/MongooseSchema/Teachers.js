@@ -18,6 +18,10 @@ const teacherSchema = new mongoose.Schema({
         required: true,
         lowercase: true
     },
+    password: {
+        type: String,
+        required: true
+    },
     tasks: {
         type: [tasksSchmea]
     }
