@@ -7,6 +7,7 @@ const typeDefs = gql`
         id: String!
         first_name: String!
         last_name: String!
+        password: String!
         classes: [String!]!
         tasks: [Task]
     }
@@ -24,6 +25,7 @@ const typeDefs = gql`
         id: String!
         first_name: String!
         last_name: String!
+        password: String!
         classes: [String!]!
         tasks: [Task]
     }
@@ -36,8 +38,8 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        createStudent(first_name: String!, last_name: String!, classes: [String!]!): Student!
-        createTeacher(first_name: String!, last_name: String!, classes: [String!]!): Teacher!
+        createStudent(first_name: String!, last_name: String!,password: String!, classes: [String!]!): Student!
+        createTeacher(first_name: String!, last_name: String!,password: String!, classes: [String!]!): Teacher!
         setTask(title: String!, description: String!, teacherid: String!): Task!
         submitTask(id: String!, text: String, tasksid: String!): Task!
         
