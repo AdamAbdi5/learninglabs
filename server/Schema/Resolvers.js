@@ -3,6 +3,7 @@ const Student = require("./MongooseSchema/Students")
 const Teacher = require("./MongooseSchema/Teachers")
 const Task = require("./MongooseSchema/TasksModel")
 const Teachers = require("./MongooseSchema/Teachers")
+const { hash } = require("bcrypt")
 const resolvers = {
     Query:{
         async getAllStudents(){
@@ -48,10 +49,12 @@ const resolvers = {
     Mutation:{
         async createStudent(parent, args){
             try{
+                const hashedPassword = await hash(args.password, 12)
                 const student = await Student.create({
                     first_name: args.first_name,
                     last_name: args.last_name,
-                    classes: args.classes
+                    classes: args.classes,
+                    password: hashedPassword
                 })
 
                 return student;
@@ -65,10 +68,12 @@ const resolvers = {
 
         async createTeacher(parent, args){
             try{
+                const hashedPassword = await hash(args.password, 12);
                 const teacher = await Teacher.create({
                     first_name: args.first_name,
                     last_name: args.last_name,
-                    classes: args.classes
+                    classes: args.classes,
+                    password: hashedPassword
                 })
                 return teacher;
             } catch(err){
