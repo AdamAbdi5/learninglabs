@@ -12,7 +12,7 @@ const typeDefs = gql`
         tasks: [Task]
     }
 
-    task LoginResponse {
+    type LoginResponse {
         accessToken: String!
     }
 
