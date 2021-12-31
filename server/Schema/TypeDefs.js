@@ -12,6 +12,10 @@ const typeDefs = gql`
         tasks: [Task]
     }
 
+    task LoginResponse {
+        accessToken: String!
+    }
+
     type Task {
         id: String!
         title: String!
@@ -38,6 +42,7 @@ const typeDefs = gql`
     }
 
     type Mutation {
+        studentLogin(first_name: String!, last_name: String!, password: String!): LoginResponse
         createStudent(first_name: String!, last_name: String!,password: String!, classes: [String!]!): Student!
         createTeacher(first_name: String!, last_name: String!,password: String!, classes: [String!]!): Teacher!
         setTask(title: String!, description: String!, teacherid: String!): Task!
