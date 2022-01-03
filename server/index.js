@@ -1,10 +1,11 @@
 const mongoose = require("mongoose")
 const {ApolloServer} = require("apollo-server-express");
-const express = require("express");
+const express = require("express")
 const {typeDefs} = require("./Schema/TypeDefs")
 const {resolvers}= require("./Schema/Resolvers")
 const uri = require("../uri")
-mongoose.connect(uri, {
+require("dotenv/config");
+mongoose.connect(process.env.URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
@@ -17,7 +18,13 @@ const app = express();
 
 
 const main = async() =>{
-  const server = new ApolloServer({typeDefs, resolvers, context: ({req, res}) => ({req, res})})
+  const server = new ApolloServer({typeDefs, resolvers, context: ({req, res}) => {
+    return {
+      req,res
+    }
+    }});
+
+  
 
   await server.start();
 
