@@ -1,0 +1,22 @@
+const {sign} = require("jsonwebtoken");
+require("dotenv/config");
+
+const createAccessToken = (person, teacher) => {
+
+    if (teacher === false) {
+        return sign({studentId: person.id, teacher: false}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "15m"})
+    }
+    return sign({teacherId: person.id, teacher: true}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "15m"})
+}
+
+const createRefreshToken = (person, teacher) => {
+    if (teacher === false) { 
+        return sign({studentId: person.id, teacher: false}, 
+            process.env.REFRESH_TOKEN_SECRET, 
+            {expiresIn: "7d"})
+    }
+
+    return sign({teacherId: person.id, teacher: false}, process.env.REFRESH_TOKEN_SECRET, {expiresIn: "7d"});
+}
+
+module.exports = {createAccessToken, createRefreshToken}
