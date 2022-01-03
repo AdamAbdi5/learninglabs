@@ -3,7 +3,9 @@ const Student = require("./MongooseSchema/Students")
 const Teacher = require("./MongooseSchema/Teachers")
 const Task = require("./MongooseSchema/TasksModel")
 const Teachers = require("./MongooseSchema/Teachers")
-const { hash } = require("bcrypt")
+const {sign} = require("jsonwebtoken")
+const { hash, compare } = require("bcrypt")
+const {createAccessToken,createRefreshToken} = require("../auth")
 const resolvers = {
     Query:{
         async getAllStudents(){
@@ -119,6 +121,36 @@ const resolvers = {
                 return err;
             }
         },
+
+        async studentLogin(parent, args, ctx){
+            
+            const {req, res} = ctx; 
+
+            const student = await Student.find({$and: [{"first_name": args.first_name.toLowerCase()}, {"last_name": args.last_name.toLowerCase()}]});
+
+
+            if (student.length === 0){
+                throw new Error("could not find student");
+            }
+            
+            const valid = await compare(args.password, student[0].password);
+
+            if (!valid){
+                throw new Error("incorrect password");
+            }
+
+            res.cookie("mid", 
+            createRefreshToken(student, false)
+            ,
+                {
+                    httpOnly: true
+                }
+                )
+
+            return {
+                accessToken: createAccessToken(student, false)
+            };
+        }
 
         
     }
