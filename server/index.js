@@ -1,9 +1,9 @@
 const mongoose = require("mongoose")
-const {ApolloServer} = require("apollo-server-express");
+const {ApolloServer} = require("apollo-server-express")
+const cors = require("cors");
 const express = require("express")
 const {typeDefs} = require("./Schema/TypeDefs")
 const {resolvers}= require("./Schema/Resolvers")
-const uri = require("../uri")
 require("dotenv/config");
 mongoose.connect(process.env.URI, {
   useNewUrlParser: true,
@@ -18,22 +18,28 @@ const app = express();
 
 
 const main = async() =>{
-  const server = new ApolloServer({typeDefs, resolvers, context: ({req, res}) => {
+  const corsOptions = {
+    credentials: true,
+    origin: 'https://studio.apollographql.com'
+  }
+  const server = new ApolloServer({typeDefs,resolvers, context: ({req, res}) => {
     return {
       req,res
     }
-    }});
+  }});
 
+ 
   
 
   await server.start();
+  app.set("trust-proxy")
+  app.use(cors(corsOptions))
 
-
-  server.applyMiddleware({app});
+  server.applyMiddleware({app, cors: corsOptions});
 
   
 
-  app.listen(6969, ()=>{
+  app.listen(4000, ()=>{
     console.log("Server running!")
   })
 }

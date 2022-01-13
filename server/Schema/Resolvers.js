@@ -143,7 +143,9 @@ const resolvers = {
             createRefreshToken(student, false)
             ,
                 {
-                    httpOnly: true
+                    httpOnly: true,
+                    secure: true,
+                    sameSite: "none"
                 }
                 )
 
