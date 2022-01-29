@@ -35,8 +35,8 @@ const typeDefs = gql`
     }
 
     type Query {
-        getAllStudents: String!
-        getAllTeachers: String!
+        getAllStudents: [Student!]!
+        getAllTeachers: [Teacher!]!
         viewTask(id: String!): Task!
         viewAllTasks(id: String!): [Task!]!
     }

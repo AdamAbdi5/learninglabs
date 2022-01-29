@@ -3,7 +3,6 @@ const Student = require("./MongooseSchema/Students")
 const Teacher = require("./MongooseSchema/Teachers")
 const Task = require("./MongooseSchema/TasksModel")
 const Teachers = require("./MongooseSchema/Teachers")
-const {sign} = require("jsonwebtoken")
 const { hash, compare } = require("bcrypt")
 const {createAccessToken,createRefreshToken} = require("../auth")
 const resolvers = {
@@ -11,13 +10,13 @@ const resolvers = {
         async getAllStudents(){
             try{
                 const students = await Student.find()
-                return JSON.stringify(students)
+
+                return students
             } catch (err){
                 return err;
             }
             
         },
-
         async getAllTeachers(){
             try{
                 const teachers = await Teachers.find()
