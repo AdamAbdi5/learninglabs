@@ -3,7 +3,9 @@ const {ApolloServer} = require("apollo-server-express")
 const cors = require("cors");
 const express = require("express")
 const {typeDefs} = require("./Schema/TypeDefs")
-const {resolvers}= require("./Schema/Resolvers")
+const {resolvers}= require("./Schema/Resolvers");
+const { verify } = require("jsonwebtoken");
+const cookieParser = require("cookie-parser")
 require("dotenv/config");
 mongoose.connect(process.env.URI, {
   useNewUrlParser: true,
@@ -18,13 +20,23 @@ const app = express();
 
 
 const main = async() =>{
-  const corsOptions = {
-    credentials: true,
-    origin: 'https://studio.apollographql.com'
-  }
+  app.use(cookieParser());
+  app.use(cors({
+    origin: "http://localhost:3000" ,
+    credentials: true
+  }))
   const server = new ApolloServer({typeDefs,resolvers, context: ({req, res}) => {
+    const authorization = req.headers["authorization"]
+    let payload = ""
+    if (authorization === ""){
+      return {
+        req, res, payload
+      }
+    }
+    const token = authorization.split(" ")[1];
+    payload = verify(token, process.env.ACCESSS_TOKEN_SECRET)
     return {
-      req,res
+      req,res,payload
     }
   }});
 
@@ -32,10 +44,10 @@ const main = async() =>{
   
 
   await server.start();
-  app.set("trust-proxy")
-  app.use(cors(corsOptions))
+  
+  
 
-  server.applyMiddleware({app, cors: corsOptions});
+  server.applyMiddleware({app, cors: false});
 
   
 
@@ -44,14 +56,7 @@ const main = async() =>{
   })
 }
 
-// const main = async()=>{
-    
-//     const user = new User({name: "Adam", age: 69});
 
-//     await user.save();
-
-//     console.log(user);
-// }
 
 
 

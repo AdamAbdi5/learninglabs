@@ -1,10 +1,11 @@
 import "./Home.css"
 import {useNavigate} from "react-router-dom"
+import { useQuery } from "urql";
 
 export default function Home(){
-
-    const navigate = useNavigate();
-
+   
+    const navigate = useNavigate()
+    
     return (
         <>  
             <header>
@@ -24,10 +25,11 @@ export default function Home(){
             </header>
 
             <section className="first-section">
-                <div clasName="heading-div"><h1 className="main-heading">Build your own future</h1></div>
-                
+                <div className="heading-div"><h1 className="main-heading"></h1></div>
+                <h1></h1>
             </section>
-        
+            
+            
            
         </>
     );

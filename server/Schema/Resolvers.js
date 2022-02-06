@@ -4,6 +4,7 @@ const Teacher = require("./MongooseSchema/Teachers")
 const Task = require("./MongooseSchema/TasksModel")
 const Teachers = require("./MongooseSchema/Teachers")
 const { hash, compare } = require("bcrypt")
+
 const {createAccessToken,createRefreshToken} = require("../auth")
 const resolvers = {
     Query:{
@@ -44,10 +45,20 @@ const resolvers = {
             } catch (err){
                 return err;
             }
-        }
+        }, 
+        
     },
 
     Mutation:{
+        refreshToken(parent, args, {req}){
+            return req.cookies
+        },
+        h1 (parent, args, ctx){
+            const {payload} = ctx;
+            
+            
+            return payload;
+        },
         async createStudent(parent, args){
             try{
                 const hashedPassword = await hash(args.password, 12)
