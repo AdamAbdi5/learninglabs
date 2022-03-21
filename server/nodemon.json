@@ -1,0 +1,7 @@
+{
+    "env" : {
+        "ACCESS_TOKEN_SECRET": "kpaljdaljdlajdaj",
+        "REFRESH_TOKEN_SECRET" : "aiuhdahndiamhndak",
+        "URI" : "mongodb://adamabdi:Pooploser69@cluster0-shard-00-00.y0zis.mongodb.net:27017,cluster0-shard-00-01.y0zis.mongodb.net:27017,cluster0-shard-00-02.y0zis.mongodb.net:27017/learning-labs?ssl=true&replicaSet=atlas-lf7x9f-shard-0&authSource=admin&retryWrites=true&w=majority"
+    }
+}

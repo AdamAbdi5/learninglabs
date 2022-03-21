@@ -6,6 +6,7 @@ const Teachers = require("./MongooseSchema/Teachers")
 const { hash, compare } = require("bcrypt")
 
 const {createAccessToken,createRefreshToken} = require("../auth")
+const Students = require("./MongooseSchema/Students")
 const resolvers = {
     Query:{
         async getAllStudents(){
@@ -18,6 +19,7 @@ const resolvers = {
             }
             
         },
+        
         async getAllTeachers(){
             try{
                 const teachers = await Teachers.find()
@@ -53,11 +55,15 @@ const resolvers = {
         refreshToken(parent, args, {req}){
             return req.cookies
         },
-        h1 (parent, args, ctx){
-            const {payload} = ctx;
+        h1 (parent, args){
             
             
-            return payload;
+            
+            return "E";
+        },
+        async viewStudent(_, args){
+            const student = await Student.find({_id: args.id})
+            return JSON.stringify(student)
         },
         async createStudent(parent, args){
             try{
@@ -162,6 +168,14 @@ const resolvers = {
             return {
                 accessToken: createAccessToken(student, false)
             };
+        },
+
+        async revokeStudentToken(_, {userId}){
+            const student = Students.find({_id: userId})
+            const number = student[0].tokenNumber + 1;
+            Students.updateOne({_id: userId}, {
+                $set:{tokenNumber:number}
+            })
         }
 
         

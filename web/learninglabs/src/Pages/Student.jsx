@@ -34,9 +34,7 @@ export default function Student(){
 
     const formSubmit = (e) => {
         e.preventDefault();
-        console.log(f_name)
         const variables = {"first_name" :f_name, "last_name" : l_name, "password" : password}
-        console.log(f_name)
         updateStudent(variables).then(result =>{
             if (result.error){
                 return result.error;

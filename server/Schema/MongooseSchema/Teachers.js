@@ -24,6 +24,10 @@ const teacherSchema = new mongoose.Schema({
     },
     tasks: {
         type: [tasksSchmea]
+    }, 
+    tokenNumber: {
+        type: Number, 
+        default: 0
     }
 })
 

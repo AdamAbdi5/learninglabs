@@ -28,6 +28,10 @@ const studentSchema = new mongoose.Schema({
 
     tasks: {
         type: [tasksSchema]
+    },
+    tokenNumber: {
+        type: Number, 
+        default: 0
     }
     
 })
