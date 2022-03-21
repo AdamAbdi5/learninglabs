@@ -57,7 +57,7 @@ const main = async() =>{
       if (teacher[0].tokenNumber !== payload.tokenNumber){
         return res.send({ok: false, accessToken: ""})
       }
-      res.cookie("mid", createRefreshToken(teacher, isteacher). {
+      res.cookie("mid", createRefreshToken(teacher, isteacher), {
         httpOnly: true, 
         secure: true,
         sameSite: "none"
